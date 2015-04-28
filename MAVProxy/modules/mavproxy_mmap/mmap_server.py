@@ -4,8 +4,8 @@ import os.path
 import thread
 import urlparse
 
-DOC_DIR = os.path.join(os.path.dirname(__file__), 'mmap_app')
-
+#DOC_DIR = os.path.join(os.path.dirname(__file__), 'mmap_app')
+DOC_DIR=os.path.join(os.getcwd(),'MAVProxy/modules/mavproxy_mmap/mmap_app')
 
 class Server(BaseHTTPServer.HTTPServer):
   def __init__(self, handler, address='', port=9999, module_state=None):
@@ -59,4 +59,5 @@ def start_server(address, port, module_state):
   server = Server(
     Handler, address=address, port=port, module_state=module_state)
   thread.start_new_thread(server.serve_forever, ())
+  print(DOC_DIR)
   return server
