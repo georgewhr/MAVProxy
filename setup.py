@@ -32,6 +32,7 @@ on how to use MAVProxy.''',
       packages=['MAVProxy',
                 'MAVProxy.modules',
                 'MAVProxy.modules.mavproxy_map',
+                'MAVProxy.modules.mavproxy_mmap',
                 'MAVProxy.modules.mavproxy_misseditor',
                 'MAVProxy.modules.lib',
                 'MAVProxy.modules.lib.ANUGA',
@@ -47,5 +48,6 @@ on how to use MAVProxy.''',
                'MAVProxy/modules/mavproxy_map/mp_tile.py'],
       package_data={'MAVProxy':
                     ['modules/mavproxy_map/data/*.jpg', 
-                     'modules/mavproxy_map/data/*.png']}
+                     'modules/mavproxy_map/data/*.png',
+                     'modules/mavproxy_mmap/mmap_app/*']}
     )
