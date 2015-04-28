@@ -269,6 +269,7 @@ function updateTelemetryDisplay() {
   $("#t_alt").html(state.alt.toPrecision(4));
   $("#t_gspd").html(state.groundspeed.toPrecision(3));
   $("#t_aspd").html(state.airspeed.toPrecision(3));
+  $("#t_thrd").html(state.throttle.toPrecision(3));
   $("#t_hdg").html(state.heading)
   now = new Date().getTime();
   $("#t_fps").html((1000.0 / (now - last_state_update_time)).toPrecision(3));
@@ -324,6 +325,7 @@ ALT <span class="t_value" id="t_alt"></span> m |
 HDG <span class="t_value" id="t_hdg"></span> |
 GNDSPD <span class="t_value" id="t_gspd"></span> m/s |
 AIRSPD <span class="t_value" id="t_aspd"></span> m/s |
+THRD <span class="t_value" id="t_thrd"></span> u |
 LINK <span class="t_value" id="t_link"></span> |
 <div class="layerpicker">
 <select id="layerpicker">

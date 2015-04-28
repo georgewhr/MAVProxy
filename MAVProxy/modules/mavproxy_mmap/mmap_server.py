@@ -24,6 +24,7 @@ class Handler(BaseHTTPServer.BaseHTTPRequestHandler):
               'heading': state.heading,
               'alt': state.alt,
               'airspeed': state.airspeed,
+              'throttle': state.throttle,
               'groundspeed': state.groundspeed}
       self.send_response(200)
       self.end_headers()
