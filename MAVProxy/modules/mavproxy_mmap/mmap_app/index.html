@@ -213,7 +213,7 @@ function initMap() {
   // --------------------
   // Microsoft Bing
   // please use your own API key!  This is jjwiseman's!
-  var key = "Anmc0b2q6140lnPvAj5xANM1rvF1A4CvVtr6H2VJvQcdnDvc8NL-I2C49owIe9xC";
+  var key = "At_H_Y9GzOU6galYJ326-Q_K3vp_FCCFOhj8wfskOEd5VMgNhdjaXKUMG7WtS2_G";
   var style = 'AerialWithLabels';
   var provider = new MM.BingProvider(key, style);
 
@@ -300,7 +300,7 @@ function updateLayer() {
   var provider;
   var layerNum = $(this).attr('value');
   console.log("Switching to layer " + layerNum);
-  var bing_key = "Anmc0b2q6140lnPvAj5xANM1rvF1A4CvVtr6H2VJvQcdnDvc8NL-I2C49owIe9xC";
+  var bing_key = "At_H_Y9GzOU6galYJ326-Q_K3vp_FCCFOhj8wfskOEd5VMgNhdjaXKUMG7WtS2_G";
   if (layerNum == '1') {
     var style = 'AerialWithLabels';
     provider = new MM.BingProvider(bing_key, style, function(provider) { map_layer.setProvider(provider); });
