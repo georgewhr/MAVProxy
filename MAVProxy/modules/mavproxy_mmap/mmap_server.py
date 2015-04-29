@@ -4,8 +4,31 @@ import os.path
 import thread
 import urlparse
 
+#from os.path import dirname, join
 #DOC_DIR = os.path.join(os.path.dirname(__file__), 'mmap_app')
-DOC_DIR=os.path.join(os.getcwd(),'MAVProxy/modules/mavproxy_mmap/mmap_app')
+#DOC_DIR=os.path.join(os.getcwd(),'MAVProxy/modules/mavproxy_mmap/mmap_app')
+#DOC_DIR='/home/gwang/uav/MAVProxy/MAVProxy/modules/mavproxy_mmap/mmap_app'
+from cherrypy import wsgiserver
+import flask
+from werkzeug import wsgi
+
+
+app = flask.Flask(__name__)
+
+DOC_DIR = os.path.join(os.path.dirname(__file__), 'mmap_app')
+
+app.wsgi_app = wsgi.SharedDataMiddleware(
+  app.wsgi_app,
+  {'/': DOC_DIR})
+
+class Error(Exception):
+  pass
+
+
+@app.route('/')
+def index_view():
+  return flask.redirect('/index.html')
+
 
 class Server(BaseHTTPServer.HTTPServer):
   def __init__(self, handler, address='', port=9999, module_state=None):
@@ -17,7 +40,10 @@ class Server(BaseHTTPServer.HTTPServer):
 class Handler(BaseHTTPServer.BaseHTTPRequestHandler):
   def do_GET(self):
     scheme, host, path, params, query, frag = urlparse.urlparse(self.path)
+    
+
     if path == '/data':
+      print('george')
       state = self.server.module_state
       data = {'lat': state.lat,
               'lon': state.lon,
@@ -34,7 +60,8 @@ class Handler(BaseHTTPServer.BaseHTTPRequestHandler):
       path = path[1:]
       # Ignore all directories.  E.g.  for ../../bar/a.txt serve
       # DOC_DIR/a.txt.
-      unused_head, path = os.path.split(path)
+      #unused_head, path = os.path.split(path)
+      #print(unused_head)
       # for / serve index.html.
       if path == '':
         path = 'index.html'
