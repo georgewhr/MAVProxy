@@ -44,9 +44,8 @@ class MMapModule(mp_module.MPModule):
  #           self.airspeed = m.airspeed
             self.groundspeed = m.groundspeed
             self.throttle = m.throttle
-            print "alt is %u,throttle is %u" %(m.alt,m.throttle) 
+#            print "alt is %u,throttle is %u" %(m.alt,m.throttle) 
 
 def init(mpstate):
     '''initialise module'''
-    print("georgewhr start")
     return MMapModule(mpstate)

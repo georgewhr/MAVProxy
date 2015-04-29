@@ -49,5 +49,5 @@ on how to use MAVProxy.''',
       package_data={'MAVProxy':
                     ['modules/mavproxy_map/data/*.jpg', 
                      'modules/mavproxy_map/data/*.png',
-                     'modules/mavproxy_mmap/mmap_app/*']}
+                     'modules/mavproxy_mmap/mmap_app/*.html']}
     )
