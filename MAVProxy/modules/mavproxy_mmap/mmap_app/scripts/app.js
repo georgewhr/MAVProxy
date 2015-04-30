@@ -1,3 +1,30 @@
+goog.provide('Avisky.App');
+
+goog.require('Avisky.GpsPopoverViewDelegate');
+goog.require('Avisky.GpsButtonView');
+goog.require('Avisky.PopoverView');
+goog.require('Avisky.RadioButtonPopoverView');
+
+
+
+
+goog.require('goog.Uri');
+goog.require('goog.array');
+goog.require('goog.async.AnimationDelay');
+goog.require('goog.async.Throttle');
+goog.require('goog.debug.Console');
+goog.require('goog.debug.FpsDisplay');
+goog.require('goog.dom');
+goog.require('goog.net.jsloader');
+/**
+ * Mavelous App object.
+ *
+ * @constructor
+ */
+Avisky.App = function() {
+};
+
+
 
 function TrailPlotter(marker_clip) {
   this.marker_clip = marker_clip
@@ -110,13 +137,14 @@ var trail_plotter;
 var last_state_update_time;
 
 var state = {};
-state.lat = 20.0;
-state.lon = 0.0;
+state.lat = 37.407739;
+state.lon = -122.030342;
 state.heading = 0.0;
 
 
 
-function initMap() {
+//function initMap() {
+Avisky.App.prototype.start = function() {
 
   // name of a div element:
   var parent = 'map';
@@ -148,12 +176,26 @@ function initMap() {
   //marker.title = "lovedrone";
   //marker_clip.addMarker(marker, location);
 
-  map.setCenterZoom(new MM.Location(20.0, 0), 20);
+  map.setCenterZoom(new MM.Location(37.407739,-122.030342), 20);
 
   setInterval(updateState, 500);
   $('#layerpicker').change(updateLayer);
 
   trail_plotter = new TrailPlotter(marker_clip);
+
+  this.gpsButtonView = new Avisky.GpsButtonView({
+    //'mavlinkSrc': this.mavlinkAPI,
+    'el': $('#navbar-btn-gps')
+  });
+    /* Radio view controller */
+  this.statusButtons = new Avisky.RadioButtonPopoverView({
+    popovers: [ { btn: this.gpsButtonView,
+                  delegate: new Avisky.GpsPopoverViewDelegate({
+                    'mavlinkSrc': this.mavlinkAPI
+                    })
+                },
+              ]
+  });
 }
 
 
@@ -235,3 +277,6 @@ function updateLayer() {
     map_layer.setProvider(provider);
   }
 }
+
+goog.exportSymbol('Avisky.App', Avisky.App);
+goog.exportSymbol('Avisky.App.prototype.start', Avisky.App.prototype.start);

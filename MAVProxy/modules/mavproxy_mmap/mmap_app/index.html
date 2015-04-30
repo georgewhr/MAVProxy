@@ -1,6 +1,11 @@
 <html>
-<head>
+
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
 <link href='http://fonts.googleapis.com/css?family=Droid+Sans+Mono' rel='stylesheet' type='text/css'>
+<!--
 <style type="text/css">
 body {
   width: 100%;
@@ -11,42 +16,8 @@ html {
   width: 100%;
 }
 
-#map {
-  height: 100%;
-  width: 100%;
-}
-
-#drone {
-  background-image: url('redcopter.png');
-  background-repeat: none;
-  position: absolute;
-  top: 45%;
-  left: 45%;
-  height: 50px;
-  width: 50px;
-  -moz-transition: all 2s ease;
-  -webkit-transition: all 2s ease;
-  -o-transition: all 2s ease;
-  -ms-transition: all 2s ease;
-  transition: all 2s ease;
-}
 
 
-.telemetry_header {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  z-index: 1;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-top: 1px;
-  padding-bottom: 1px;
-  font-family: 'Droid Sans Mono', Courier, Courier News, monospace;
-  font-size: 24px;
-}
 
 .layerpicker {
   display: inline;
@@ -72,20 +43,127 @@ html {
   color: black;
 }
 </style>
+-->
+
+<link rel="stylesheet" type="text/css" href="3rd_party/bootstrap/css/bootstrap.css" />
+<style>
+    body {
+      padding-top: 20px;
+    }
+
+
+#map {
+  height: 100%;
+  width: 100%;
+}
+
+#drone {
+  background-image: url('redcopter.png');
+  background-repeat: none;
+  position: absolute;
+  top: 45%;
+  left: 45%;
+  height: 50px;
+  width: 50px;
+  -moz-transition: all 2s ease;
+  -webkit-transition: all 2s ease;
+  -o-transition: all 2s ease;
+  -ms-transition: all 2s ease;
+  transition: all 2s ease;
+}
+</style>
+  <!--
+
+<link rel="stylesheet" type="text/css" href="3rd_party/bootstrap/css/bootstrap-responsive.css" />
+<link rel="stylesheet" type="text/css" href="3rd_party/leaflet/leaflet.css" />
+<link rel="stylesheet" type="text/css" href="style.css" />-->
+
+
 
 <script type="text/javascript" src="scripts/modestmaps.js"></script>
 <script type="text/javascript" src="scripts/bluemarble.js"></script>
 <script type="text/javascript" src="scripts/bing.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+
+
+<!-- BOOTSTRAP -->
+<script type="text/javascript" src="3rd_party/bootstrap/js/bootstrap-transition.js"></script>
+<script type="text/javascript" src="3rd_party/bootstrap/js/bootstrap-modal.js"></script>
+<script type="text/javascript" src="3rd_party/bootstrap/js/bootstrap-dropdown.js"></script>
+<script type="text/javascript" src="3rd_party/bootstrap/js/bootstrap-tooltip.js"></script>
+<script type="text/javascript" src="3rd_party/bootstrap/js/bootstrap-popover.js"></script>
+<script type="text/javascript" src="3rd_party/bootstrap/js/bootstrap-button.js"></script>
+<script type="text/javascript" src="3rd_party/bootstrap/js/bootstrap-collapse.js"></script>
+
+<!-- BACKBONE -->
+<script type="text/javascript" src="3rd_party/underscore-1.3.3.js"></script>
+<script type="text/javascript" src="3rd_party/backbone-0.9.9.js"></script>
+<script type="text/javascript" src="3rd_party/backbone.marionette.js"></script>
+
+<!-- KINETIC: for drawing pfd -->
+<script type="text/javascript" src="3rd_party/kinetic-v4.5.5.min.js"></script>
+
+<!-- LEAFLET -->
+<script type="text/javascript" src="3rd_party/leaflet-0.5.js"></script>
+<script type="text/javascript" src="3rd_party/leaflet/layer/tile/Bing.js"></script>
+<script type="text/javascript" src="3rd_party/leaflet/layer/marker/Marker.Rotate.js"></script>
+<script type="text/javascript" src="3rd_party/leaflet/map/handler/Map.CenterScrollWheelZoom.js"></script>
+<script type="text/javascript" src="3rd_party/leaflet/map/handler/Map.CenterTouchZoom.js"></script>
+
+
+<!-- GOOGLE CLOSURE -->
+<script src="3rd_party/closure-library/closure/goog/base.js"></script>
+<script src="scripts/as-deps.js"></script>
+
+<!-- AviSky -->
 <script type="text/javascript" src="scripts/app.js"></script>
+
+
+
+<title>AviSky.net</title>
+</head>
+
 <script>
-
-
+  $(function() {
+  window.avisky_app = new Avisky.App();
+  avisky_app.start();
+    });
 </script>
 
-<title>modest mavmap</title>
-</head>
-<body onload="initMap()">
+<body>
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container-fluid">
+        <a class="brand hidden-phone" href="#">AviSky</a>
+        <ul class="nav">
+          <li id="navbar-overview" class="hidden-phone">
+            <a href="#overview">Overview</a>
+          </li>
+          <li id="navbar-fullpfd">
+            <a href="#fullpfd">PFD</a>
+          </li>
+          <li id="navbar-maponly">
+            <a href="#maponly">Map</a>
+          </li>
+          <li class="divider-vertical"></li>
+        </ul>
+        <span class="navbar-text">
+          <a class="btn" id="navbar-btn-flightstatus" href="#">Status</a>
+          <a class="btn" id="navbar-btn-mode" href="#">Mode</a>
+          <a class="btn" id="navbar-btn-gps" href="#">GPS</a>
+          <a class="btn" id="navbar-btn-link" href="#">Link</a>
+          <a class="btn" id="navbar-btn-battery" href="#">Batt</a>
+          <span class="t_value" id="t_lat"></span>, <span class="t_value" id="t_lon"></span>
+        </span>
+        <span class="navbar-text" id="fps"></span>
+        <ul class="nav pull-right">
+          <li><a href="#" id="navbar-a-settings"><i class="icon-cog icon-white"></i></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+<!--
 <div class="telemetry_header">
 ALT <span class="t_value" id="t_alt"></span> m |
 HDG <span class="t_value" id="t_hdg"></span> |
@@ -93,16 +171,18 @@ GNDSPD <span class="t_value" id="t_gspd"></span> m/s |
 AIRSPD <span class="t_value" id="t_aspd"></span> m/s |
 THRD <span class="t_value" id="t_thrd"></span> u |
 LINK <span class="t_value" id="t_link"></span> |
-<div class="layerpicker">
+-->
+
+<!--<div class="layerpicker">
 <select id="layerpicker">
   <option value="1">Microsoft Bing (aerial)</option>
   <option value="2">Microsoft Bing (birdseye)</option>
   <option value="3">Microsoft Bing (road)</option>
   <option value="4">Blue Marble</option>
 <select>
-</div>
-<br>
-(<span class="t_value" id="t_lat"></span>, <span class="t_value" id="t_lon"></span>)
+</div>-->
+<!--<br>
+(<span class="t_value" id="t_lat"></span>, <span class="t_value" id="t_lon"></span>)-->
 </div>
 <div id="map"></div>
 <div id="drone"></div>
