@@ -14,15 +14,19 @@ Avisky.GpsPopoverViewDelegate = function(properties) {
 };
 goog.inherits(Avisky.GpsPopoverViewDelegate , Backbone.View);
 
+Avisky.GpsButtonView.prototype.initialize = function() {
+	console.log("GpsButtonView initialized");
+};
+
 Avisky.GpsPopoverViewDelegate.prototype.initialize = function() {
-	console.log("hello ppp");
+	console.log("GpsPopoverViewDelegate initialized");
   /*var mavlink = this.options['mavlinkSrc'];
   this.gps = mavlink.subscribe('GPS_RAW_INT', this.render, this);
   this.stat = mavlink.subscribe('GPS_STATUS', this.render, this);*/
 };
 
 Avisky.GpsPopoverViewDelegate.prototype.popoverCreated = function(el) {
-	console.log("hello  ll");
+  console.log("hello  ll");
   this.$el = el;
   this.$el.find('.popover-title').text(this.popoverTitle);
   this.render();

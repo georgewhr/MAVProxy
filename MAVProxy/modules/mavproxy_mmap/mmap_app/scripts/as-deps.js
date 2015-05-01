@@ -1,6 +1,8 @@
 goog.addDependency("../../../../scripts/app.js", ['Avisky.App'], ['Avisky.GpsPopoverViewDelegate']);
 goog.addDependency("../../../../scripts/as_gps.js", ['Avisky.GpsPopoverViewDelegate'], []);
 goog.addDependency("../../../../scripts/as_gps.js", ['Avisky.GpsButtonView'], []);
+goog.addDependency("../../../../scripts/as_status.js", ['Avisky.FlightStatusPopoverViewDelegate'], []);
+goog.addDependency("../../../../scripts/as_status.js", ['Avisky.FlightStatusButtonView'], []);
 goog.addDependency("../../../../scripts/bing.js", [], []);
 goog.addDependency("../../../../scripts/bluemarble.js", [], []);
 goog.addDependency("../../../../scripts/modestmaps.js", [], []);

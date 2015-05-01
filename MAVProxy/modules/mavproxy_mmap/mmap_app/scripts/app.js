@@ -2,6 +2,8 @@ goog.provide('Avisky.App');
 
 goog.require('Avisky.GpsPopoverViewDelegate');
 goog.require('Avisky.GpsButtonView');
+goog.require('Avisky.FlightStatusPopoverViewDelegate');
+goog.require('Avisky.FlightStatusButtonView');
 goog.require('Avisky.PopoverView');
 goog.require('Avisky.RadioButtonPopoverView');
 
@@ -187,6 +189,11 @@ Avisky.App.prototype.start = function() {
     //'mavlinkSrc': this.mavlinkAPI,
     'el': $('#navbar-btn-gps')
   });
+
+  this.flightstatusButtonView = new Avisky.FlightStatusButtonView({
+    //'mavlinkSrc': this.mavlinkAPI,
+    'el': $('#navbar-btn-flightstatus')
+  });
     /* Radio view controller */
   this.statusButtons = new Avisky.RadioButtonPopoverView({
     popovers: [ { btn: this.gpsButtonView,
@@ -194,6 +201,13 @@ Avisky.App.prototype.start = function() {
                     'mavlinkSrc': this.mavlinkAPI
                     })
                 },
+
+                { btn: this.flightstatusButtonView,
+                  delegate: new Avisky.FlightStatusPopoverViewDelegate({
+                    'packetLossModel': this.packetLossModel
+                    })
+                }
+
               ]
   });
 }
